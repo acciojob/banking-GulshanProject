@@ -26,39 +26,23 @@ public class BankAccount {
 
 
 
-
-
-    public int DigitSum(int digit){
-        int sumOfDigit=0;
-        while(digit!=0){
-            int rem= digit%10;
-            sumOfDigit+=rem;
-            digit=digit/10;
-        }
-        return sumOfDigit;
-    }
-    public String convertStringFromDigit(int digit){
-        String AccountNo="";
-        while(digit!=0){
-            int rem= digit%10;
-            AccountNo+=rem;
-            digit=digit/10;
-        }
-        return AccountNo;
-
-    }
     public String generateAccountNumber(int digits, int sum) throws Exception{
         //Each digit of an account number can lie between 0 and 9 (both inclusive)
         //Generate account number having given number of 'digits' such that the sum of digits is equal to 'sum'
         //If it is not possible, throw "Account Number can not be generated" exception
 
-           if(DigitSum(digits)==sum){
-               String generateAccountNo= convertStringFromDigit(digits);
-               return generateAccountNo;
-           }
-           else {
-               throw new Exception("Account Number can not be generated");
-           }
+        //If it is not possible, throw "Account Number can not be generated" exception
+        for (digits = 0; digits <= 9; digits++) {
+            int sums = 0;
+            int digit = digits % 10;
+            sums += digit;
+            digits = digits / 10;
+
+            if (sums != sum) {
+                throw new Exception("Account Number can not be generated");
+            }
+        }
+        return String.valueOf(digits);
 
 
     }
